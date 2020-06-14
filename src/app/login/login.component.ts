@@ -31,8 +31,8 @@ export class LoginComponent implements OnInit {
   constructor(private fb : FormBuilder, private authService : AuthService, private router : Router, private service : LoginService
     , private _snackbar : MatSnackBar) {
     this.loginForm = this.fb.group({
-      userid:['9114526610', [Validators.required, Validators.email]],
-      password : ['123456', [Validators.required, Validators.minLength(6)]]
+      userid:['', [Validators.required, Validators.email]],
+      password : ['', [Validators.required, Validators.minLength(6)]]
     });
      //if user is already logged in
      if(this.authService.isLoggedIn()){

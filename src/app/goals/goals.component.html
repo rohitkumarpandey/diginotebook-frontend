@@ -60,7 +60,7 @@
 
              <div class="form-group">
                 <label>Deadline:</label>
-                <input class="form-control" type="date" formControlName="deadline">
+                <input class="form-control" type="date" formControlName="deadline" min="{{todayDate | date: 'yyyy-MM-dd'}}" >
                 <p class="text-danger" *ngIf="addGoalForm.controls.deadline.hasError('required') && addGoalForm.controls.deadline.dirty">Deadline date is <strong>required</strong></p>
 
             </div>

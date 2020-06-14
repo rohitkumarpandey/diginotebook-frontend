@@ -16,6 +16,7 @@ export class GoalsComponent implements OnInit {
  isCompleted :boolean= true;
  isTasksLoaded : boolean =false;
  addGoalForm : FormGroup;
+ todayDate=new Date();
 
   constructor(private service : GoalsService, private authService : AuthService, private fb : FormBuilder,
      private snackbar : MatSnackBar, private router : Router) { 
