@@ -1,0 +1,127 @@
+
+
+/* for mobile */
+@media only screen and (max-width: 600px) and (orientation : portrait){
+   
+    div.goals ul li .goal{
+        width: 100%!important;
+    }
+    div.goals ul li{
+        
+        padding-left: 0!important;
+    }
+    
+   
+  }
+  
+  @media only screen and (orientation : landscape){
+  
+    
+   
+  }
+  
+  @media only screen and (min-width : 601px) and (max-width:1024px){
+  
+   
+  
+  }
+  
+
+
+div.menu{
+    text-align: left;
+    position: sticky;
+    top: 0;
+    background-color: whitesmoke;
+    z-index: 10;
+
+}
+
+div.menu a{
+    text-decoration: none;
+    padding: 14px;
+    white-space: nowrap;
+    display: inline-block;
+    text-align: center;
+
+}
+
+div.menu a:hover{
+    background-color: lightslategrey;
+}
+
+#addGoalBtn{
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+    opacity: .9;
+}
+
+div.goals{
+    background-color: white;
+    height: 100%;
+    text-align: left;
+    padding-top: 20px;
+    
+}
+h3{
+    text-align: center;
+    color: lightslategrey;
+}
+
+div.goals ul{
+    list-style-type: none;
+    padding-left: 0;
+}
+
+div.goals ul li{
+   width: 100%;
+   padding-left: 5%;
+   height: 25vh;
+}
+
+div.goals ul li .goal{
+    
+    background-color: white;
+    width: 50%;
+    padding: .2em;
+    padding-left: 1em;
+    box-shadow: 5px 5px 10px lightslategrey;
+}
+div.goals ul li .goal .options {
+    float: right;
+    line-height: 2vh;
+    padding: .4em;
+}
+
+mat-icon{
+    z-index: -1;
+    vertical-align: middle;
+}
+
+div.goals ul li .goal h4{
+    text-transform: uppercase;
+    font-weight: bolder;
+    letter-spacing: .1em;
+}
+
+div.goals ul li .goal h5{
+    text-transform: capitalize;
+    font-weight: 400;
+}
+
+#myModal .modal-content{
+    text-align: left;
+    background-color: whitesmoke;
+    color: lightslategrey;
+}
+
+input{
+    font-weight: bold;
+}
+input:first-of-type{
+    text-transform: capitalize;
+}
+::placeholder{
+    background-color: brown;
+}

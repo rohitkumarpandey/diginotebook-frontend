@@ -1,0 +1,18 @@
+<div class="container-fluid box">
+    <div class="conatiner-fluid profile-container">
+    <strong id="username">Hi&nbsp;{{username}}</strong>
+    <button class="btn btn-sm" (click)="logout()">Logout</button>
+    </div>  
+<label>D!Gi Notebook</label>
+<p>A Digital Notebook that organize your data at one place.</p>
+
+</div>
+<div class="scrollmenu">
+
+    <a href="#" [routerLink]="['/goals']">Goals</a>
+    <a href="#">Credentials</a>
+    <a href="#">Contacts</a>
+    <a href="#">Gallery</a>
+</div>
+<router-outlet></router-outlet>
+  
