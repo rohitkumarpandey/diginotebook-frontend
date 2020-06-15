@@ -1,6 +1,6 @@
 
 /* for mobile */
-@media only screen and (max-width: 600px) and (orientation : portrait){
+@media only screen and (max-width: 600px) {
 
   div.login-container{
     width: 90%!important;
@@ -26,7 +26,7 @@
 
 
 div.login-container{
-  margin-top: 10vh;
+  margin-top: 15vh;
   text-align: center;  
   width: 30vw;
   background-color: #003152;  
