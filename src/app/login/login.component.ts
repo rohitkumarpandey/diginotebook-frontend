@@ -27,6 +27,7 @@ export class LoginComponent implements OnInit {
   loginForm : FormGroup;
   errorMessage :string = null;
    matcher = new MyErrorStateMatcher();
+   showProgressBar : boolean = false;
 
   constructor(private fb : FormBuilder, private authService : AuthService, private router : Router, private service : LoginService
     , private _snackbar : MatSnackBar) {
@@ -45,6 +46,7 @@ export class LoginComponent implements OnInit {
   }
 
   login(){
+    this.showProgressBar = true;
     this.service.loginService(this.loginForm.value)
     .then((res)=>{
       if(res.success){
@@ -58,6 +60,8 @@ export class LoginComponent implements OnInit {
     this.authService.setUserId(res.userid);
     
     this.router.navigateByUrl('/home');
+
+    this.showProgressBar = false;
       }else{
         this._snackbar.open(res.errorMessage,'Ok',{ duration : 2000});
       }

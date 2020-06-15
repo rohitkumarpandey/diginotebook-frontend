@@ -4,6 +4,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
 import { GoalsComponent } from './goals/goals.component';
+import { CredentialsComponent } from './credentials/credentials.component';
 
 
 
@@ -14,7 +15,8 @@ const routes: Routes = [
   {path : 'home', component : HomeComponent,
 children:[
   {path :'', redirectTo : 'goals', pathMatch : 'full'},
-  {path : 'goals', component : GoalsComponent} 
+  {path : 'goals', component : GoalsComponent},
+  {path : 'credentials', component : CredentialsComponent}  
 ]}
 ];
 

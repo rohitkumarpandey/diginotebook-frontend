@@ -34,20 +34,22 @@ div.menu{
     top: 0;
     background-color: whitesmoke;
     z-index: 10;
+    padding: 8px;
 
 }
 
 div.menu a{
     text-decoration: none;
-    padding: 14px;
+    padding: 8px;
     white-space: nowrap;
     display: inline-block;
     text-align: center;
 
 }
 
-div.menu a:hover{
-    background-color: lightslategrey;
+div.menu a:hover, .active{
+    background-color: #003152;
+    color: white;
 }
 
 #addGoalBtn{
@@ -77,7 +79,7 @@ div.goals ul{
 div.goals ul li{
    width: 100%;
    padding-left: 5%;
-   height: 25vh;
+   height: 160px;
 }
 
 div.goals ul li .goal{

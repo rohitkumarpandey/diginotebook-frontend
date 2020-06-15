@@ -66,23 +66,53 @@ label{
     margin-top:6%;
     
 }
+#logoutBtn:hover , #logoutBtn:active,  #logoutBtn:focus{
+    color: white;
+}
 
 
 
-div.scrollmenu {
+#scrollmenu {
     background-color: white;
     overflow: auto;
     white-space: nowrap;
+    padding-top: 5px;
+    padding-bottom: 5px;
   }
   
-  div.scrollmenu a {
+ #scrollmenu a {
     display: inline-block;
     text-align: center;
-    padding: 15px;
+    padding: 10px;
     text-decoration: none;
+    background-color: white;
   }
   
-  div.scrollmenu a:hover {
-    background-color: #777;
+#scrollmenu a:hover, .active {
+    border-style: groove;
+    border-width: 0 0 4px 0;
+    border-color: white;
+    border-bottom-color: #003152;
+    background-color: white;
+    color: #003152;
+    
   }
+
+  .modal-body{
+      text-align: left;
+      background-color: #3d444a;
+      line-height: 30px;
+     }
+
+  .modal-body strong{
+    color: white;
+    vertical-align: middle;
+    font-size: large;
+  }
+  .modal-body button{
+      margin: 5px;
+      float: right;
+      vertical-align: middle;
+  }
+ 
 

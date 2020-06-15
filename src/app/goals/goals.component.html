@@ -1,6 +1,6 @@
 <div class="menu">
-    <a href="#">ALL</a>
-    <a href="#">COMPLETED</a>
+    <a class="btn active">ALL</a>
+    <a class="btn">COMPLETED</a>
 </div>
 <mat-progress-bar mode="indeterminate" *ngIf="!isTasksLoaded"></mat-progress-bar>
 <button id="addGoalBtn" mat-fab  color="primary" matTooltip="Add Goal" aria-label="Add" data-toggle="modal" data-target="#myModal">
@@ -84,4 +84,5 @@
       
     </div>
   </div>
-  
+
+
