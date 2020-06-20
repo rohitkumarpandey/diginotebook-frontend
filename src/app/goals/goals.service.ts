@@ -9,8 +9,9 @@ export class GoalsService {
 
   constructor(private http : HttpClient) { }
 
-  getTasks(uid):Promise<any>{
-    return this.http.get(environment.baseUrl+'/getTasks/'+uid)
+  getPendingTasks(uid):Promise<any>{
+    
+    return this.http.get(environment.baseUrl+'/getPendingTasks/'+uid)
     .toPromise()
     .then((res)=>{
         return res;
@@ -35,6 +36,27 @@ export class GoalsService {
 
     }).catch()
   }
+
+  //mark task completed
+  taskCompleted(tid, data): Promise<any>{
+    return this.http.put(environment.baseUrl+'/taskCompleted/'+tid, data)
+    .toPromise()
+    .then((taskCompleted)=>{
+      if(taskCompleted){
+        return taskCompleted;
+      }
+    }).catch(err=> {return err});
+
+  }
+
+  //get all completed tasks
+  getAllCompletedTasks(uid){
+    return this.http.get(environment.baseUrl+'/getCompletedTasks/'+uid)
+    .toPromise()
+    .then((res)=>{
+      return res;
+    }).catch(err=>{return err;})
+  } 
 
  
 }

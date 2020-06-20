@@ -63,7 +63,7 @@ export class LoginComponent implements OnInit {
 
     this.showProgressBar = false;
       }else{
-        this._snackbar.open(res.errorMessage,'Ok',{ duration : 2000});
+        this._snackbar.open(res.errorMessage,'',{ duration : 2000});
       }
 
     })

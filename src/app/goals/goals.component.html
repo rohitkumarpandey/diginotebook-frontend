@@ -1,6 +1,6 @@
 <div class="menu">
     <a class="btn active">ALL</a>
-    <a class="btn">COMPLETED</a>
+    <a class="btn" (click)="getAllCompletedTasks()">COMPLETED</a>
 </div>
 <mat-progress-bar mode="indeterminate" *ngIf="!isTasksLoaded"></mat-progress-bar>
 <button id="addGoalBtn" mat-fab  color="primary" matTooltip="Add Goal" aria-label="Add" data-toggle="modal" data-target="#myModal">
@@ -33,7 +33,9 @@
                 <h5>Deadline on : {{task.deadline | date : 'fullDate'}}</h5>
                 <h5>Priority: {{task.priority}}</h5>
                 <h5>Created On: {{task.createdOn | date : 'fullDate'}}</h5>
-                <mat-slide-toggle >COMPLETED</mat-slide-toggle>
+                <form [formGroup]="taskCompletedForm">
+                <mat-slide-toggle formControlName = "taskCompleted" (change)="completedTask($event, task._id)">COMPLETED</mat-slide-toggle>
+              </form>
             </div>
         </li>
       

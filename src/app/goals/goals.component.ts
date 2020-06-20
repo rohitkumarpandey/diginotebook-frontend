@@ -13,11 +13,13 @@ declare var $ : any;
 })
 export class GoalsComponent implements OnInit {
  tasks : [] = null;
- message : string = "You do not set any task yet";
- isCompleted :boolean= true;
+ completedTasksArray : [] = null;
+ message : string = "You do not set any task yet fe";
+
  isTasksLoaded : boolean =false;
  addGoalForm : FormGroup;
  todayDate=new Date();
+ taskCompletedForm : FormGroup;
 
   constructor(private service : GoalsService, private authService : AuthService, private fb : FormBuilder,
      private snackbar : MatSnackBar, private router : Router) { 
@@ -26,7 +28,13 @@ export class GoalsComponent implements OnInit {
       taskname : ['',[Validators.required]],
       deadline : ['', [Validators.required]],
       priority : ['', [Validators.required]]
-    })
+    });
+
+    this.taskCompletedForm = this.fb.group({
+      taskCompleted : [false]
+    });
+
+    
   }
 
   ngOnInit() {
@@ -42,19 +50,22 @@ export class GoalsComponent implements OnInit {
       });
 
     });
-    this.loadAllTasks();
+    this.loadAllPendingTasks();
   }
   //load all tasks
-  loadAllTasks(){
+  loadAllPendingTasks(){
     if(this.authService.isLoggedIn()) this.router.navigateByUrl('/home');
+    
     this.tasks = null;
     this.isTasksLoaded = false;
-    this.service.getTasks(this.authService.getUserId())
+    this.service.getPendingTasks(this.authService.getUserId())
     .then((res)=>{
         if(res.length !=0) {
           this.tasks = res;
           this.message = null;
         }
+
+        //this.message = res.toString();
     
     }).then(()=>{
       this.isTasksLoaded = true;
@@ -69,7 +80,7 @@ export class GoalsComponent implements OnInit {
         this.snackbar.open(res,'Ok', {
           duration : 3000
         })
-        this.loadAllTasks();
+        this.loadAllPendingTasks();
     })
     .catch();
   }
@@ -89,13 +100,57 @@ export class GoalsComponent implements OnInit {
           duration : 1500
         });
 
-        this.loadAllTasks();
+        this.loadAllPendingTasks();
       })
-    });
+    });}
+  }
+
+  //mark Task Completed
+  completedTask(event, tid){
     
-    
+    if(event.checked){
+      let snackbarref = this.snackbar.open('Task Completed ?','Yes', {
+        duration : 2000
+      });
+      snackbarref.onAction().subscribe(()=>{
+        this.taskCompletedForm.value.taskCompleted = true;
+        this.service.taskCompleted(tid, this.taskCompletedForm.value)
+        .then((res)=>{
+          this.snackbar.open(res,'',{
+            duration : 2000});
+            this.loadAllPendingTasks();
+        }).catch((err)=>{
+          this.snackbar.open(err,'',{
+            duration : 2000});
+            this.loadAllPendingTasks();
+        })
+      });
+      // console.log('after dismissed');
+      // snackbarref.afterDismissed().subscribe(()=>{
+        
+      //   if(!this.taskCompletedForm.value.taskCompleted){
+         
+      //     //this.taskCompletedForm.value.taskCompleted = false;
+      //   }
+      // });
+      }
+   
+  }
+
+  //load all completed tasks
+  getAllCompletedTasks(){
+    this.message = null;
+    this.completedTasksArray = null;
+    this.service.getAllCompletedTasks(this.authService.getUserId())
+    .then((res)=>{
+      if(res.length !=0 ){
+      this.completedTasksArray = res;
+      console.log(this.completedTasksArray);
+      }else{
+        this.message = 'You have not completed any task yet fe';
+      }
+    }).catch(err=>{this.message = err});
 
   }
-}
 
 }
