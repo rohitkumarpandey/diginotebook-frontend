@@ -34,4 +34,32 @@ export class CredentialsService {
     });
 
   }
+
+  //delete Credential
+  deleteCredential(uid, cid):Promise<any>{
+    return this.http.delete(environment.baseUrl+'/deleteCredential/'+uid+'/'+cid)
+    .toPromise()
+    .then((result:any) => {
+      return result;
+      
+    }).catch((err) => {
+      return err;
+      
+    });
+
+  }
+
+   //update Credential
+   updateCredential(cid, data):Promise<any>{
+    return this.http.put(environment.baseUrl+'/updateCrdential/'+cid, data)
+    .toPromise()
+    .then((result:any) => {
+      return result;
+      
+    }).catch((err) => {
+      return err;
+      
+    });
+
+  }
 }

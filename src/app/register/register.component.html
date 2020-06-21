@@ -1,6 +1,7 @@
 
 <div class="container-fluid register-container">
   
+    
     <label>D!GI Notebook</label>
     <div class="container-fluid register-form-container">
         
@@ -34,11 +35,7 @@
       </button>
       
     </mat-form-field>
-    <!-- <mat-form-field class="full-width">
-        <mat-label>Re-Password</mat-label>
-        <input formControlName="repassword" matInput [type]="hide ? 'password' : 'text'" placeholder="Enter Password Again">
-        
-      </mat-form-field> -->
+    
     <div class="container-fluid" >
       <a mat-raised-button (click)="register()" [disabled]="registerationForm.invalid">Register</a>
     </div>
@@ -51,6 +48,7 @@
     
   
   </form>
+  <mat-progress-bar mode="indeterminate" *ngIf="!isLoaded"></mat-progress-bar>
     </div>
 </div>
   

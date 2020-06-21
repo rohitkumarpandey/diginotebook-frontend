@@ -5,6 +5,7 @@ import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
 import { GoalsComponent } from './goals/goals.component';
 import { CredentialsComponent } from './credentials/credentials.component';
+import { NotesComponent } from 'src/app/notes/notes.component';
 
 
 
@@ -16,7 +17,8 @@ const routes: Routes = [
 children:[
   {path :'', redirectTo : 'goals', pathMatch : 'full'},
   {path : 'goals', component : GoalsComponent},
-  {path : 'credentials', component : CredentialsComponent}  
+  {path : 'credentials', component : CredentialsComponent},
+  {path : 'notes', component : NotesComponent}    
 ]}
 ];
 

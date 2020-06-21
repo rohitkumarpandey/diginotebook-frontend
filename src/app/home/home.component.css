@@ -72,29 +72,38 @@ label{
 
 
 
-#scrollmenu {
+.scrollmenu {
     background-color: white;
     overflow: auto;
     white-space: nowrap;
     padding-top: 5px;
     padding-bottom: 5px;
   }
+  .btn{
+    outline: none;
+    background-color: white;
+    cursor: pointer;
+  }
+
+  /* .active, .btn:hover {
+      border-style: solid;
+      border-width: 0px 0px 2px
+    border-bottom-color: #003152;
+  } */
   
- #scrollmenu a {
+ .scrollmenu a {
     display: inline-block;
     text-align: center;
     padding: 10px;
     text-decoration: none;
-    background-color: white;
+    
   }
   
-#scrollmenu a:hover, .active {
-    border-style: groove;
-    border-width: 0 0 4px 0;
-    border-color: white;
-    border-bottom-color: #003152;
-    background-color: white;
-    color: #003152;
+.scrollmenu a:hover,.scrollmenu a:visited,.scrollmenu a:active, .active {
+   
+    border-width: 0px 0px 4px 0px;
+    border-color: #003152;
+   
     
   }
 

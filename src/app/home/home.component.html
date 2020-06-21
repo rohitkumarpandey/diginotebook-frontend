@@ -3,15 +3,15 @@
     <strong id="username">Hi&nbsp;{{username}}</strong>
     <button id="logoutBtn" class="btn btn-sm" data-toggle="modal" data-target="#logoutModal">LogOut</button>
     </div>  
-<label>D!Gi Notebook</label>
+<label>D!GI Notebook</label>
 <p>A Digital Notebook that organizes your data at one place.</p>
 
 </div>
-<div id="scrollmenu">
+<div class="scrollmenu">
 
     <a class="btn active"  [routerLink]="['goals']">Goals</a>
     <a class="btn" [routerLink]="['credentials']">Credentials</a>
-    <a  class="btn">Contacts</a>
+    <a class="btn" [routerLink]="['notes']">Notes</a>
     <a class="btn" >Gallery</a>
 </div>
 <router-outlet></router-outlet>

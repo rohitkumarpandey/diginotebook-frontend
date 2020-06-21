@@ -33,7 +33,8 @@ import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
 import { TasksComponent } from './tasks/tasks.component';
 import { GoalsComponent } from './goals/goals.component';
-import { CredentialsComponent } from './credentials/credentials.component'; 
+import { CredentialsComponent } from './credentials/credentials.component';
+import { NotesComponent } from './notes/notes.component'; 
 
 
 @NgModule({
@@ -44,7 +45,8 @@ import { CredentialsComponent } from './credentials/credentials.component';
     HomeComponent,
     TasksComponent,
     GoalsComponent,
-    CredentialsComponent
+    CredentialsComponent,
+    NotesComponent
   ],
   imports: [
     BrowserModule,

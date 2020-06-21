@@ -1,4 +1,4 @@
-<mat-progress-bar mode="indeterminate" *ngIf="showProgressBar"></mat-progress-bar>
+
 <div class="container-fluid login-container">
   <label>D!GI Notebook</label>
     <div class="container-fluid login-form-container">
@@ -37,12 +37,13 @@
       
     
   <div class="container-fluid registerLink">
-    <p>Don't have account? <a href="#"[routerLink]="['/register']">Sign up</a></p>
+    <p>Don't have account? <a href="#"[routerLink]="['/register']">Sign Up</a></p>
   </div>
   <strong class="text-danger" *ngIf="errorMessage!=null">{{errorMessage}}</strong>
     
   
   </form>
+  <mat-progress-bar mode="indeterminate" *ngIf="showProgressBar"></mat-progress-bar>
     </div>
 </div>
   

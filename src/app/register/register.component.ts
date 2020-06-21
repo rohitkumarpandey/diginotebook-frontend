@@ -27,6 +27,7 @@ export class RegisterComponent implements OnInit {
   registerationForm : FormGroup;
   errorMessage : string = null;
   matcher = new MyErrorStateMatcher();
+  isLoaded : boolean = true;
 
   constructor(private fb : FormBuilder, private service : RegisterService, private router : Router
   , private authService : AuthService) {
@@ -44,6 +45,7 @@ export class RegisterComponent implements OnInit {
   }
 
   register(){
+    this.isLoaded = false;
     if(this.authService.isLoggedIn()) this.router.navigateByUrl('/home');
     else{
     this.service.registerService(this.registerationForm.value)
@@ -63,6 +65,8 @@ export class RegisterComponent implements OnInit {
         this.errorMessage = "";
         this.errorMessage = res.errorMessage;
       }
+    }).then(()=>{
+      this.isLoaded = true;
     })
   }
 }

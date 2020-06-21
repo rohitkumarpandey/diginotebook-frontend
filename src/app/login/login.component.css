@@ -32,6 +32,10 @@ div.login-container{
   background-color: #003152;  
   padding: 0;
   box-shadow: 2px 5px 10px lightslategrey;
+  border-style:solid;
+  border-width:3px 0px 0px 3px;
+  border-color: white;
+  border-radius: 10px;   
   
 }
 
@@ -45,10 +49,11 @@ div label{
 
 div.login-form-container{
   background-color: white ;
-  border-top-left-radius: 20%;
   margin-top: 10vh;
   padding: 5%;
   text-align: center;
+  border-radius: 20% 0px 0px 10px;
+  
   
 }
 

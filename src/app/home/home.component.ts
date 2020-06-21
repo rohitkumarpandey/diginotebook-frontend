@@ -18,21 +18,14 @@ export class HomeComponent implements OnInit {
    }
 
   ngOnInit() {
-
-    // window.addEventListener('load', function(){
-    //   var activeTab = sessionStorage.getItem('activeTab');
-    //   this.console.log(activeTab);
-    //   $('#scrollmenu .btn[class="'+activeTab+'"]').addClass('active');
-
-    // });
     $(document).ready(function(){
       $(this).scrollTop(0);
-      $('#scrollmenu .btn').removeClass('active');
-      $('#scrollmenu .btn').eq(sessionStorage.getItem('activeTabIndex')).addClass('active')
-      $('#scrollmenu .btn').click(function() {
-        $('#scrollmenu .btn').removeClass('active');
+      $('.scrollmenu .btn').removeClass('active');
+      $('.scrollmenu .btn').eq(localStorage.getItem('activeTabIndex')).addClass('active')
+      $('.scrollmenu .btn').click(function() {
+        $('.scrollmenu .btn').removeClass('active');
         $(this).addClass('active');
-        sessionStorage.setItem('activeTabIndex', $('#scrollmenu .btn').index(this));
+        localStorage.setItem('activeTabIndex', $('.scrollmenu .btn').index(this));
         
       });
 

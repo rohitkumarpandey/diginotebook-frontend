@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CredentialsService } from 'src/app/credentials/credentials.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { MatSnackBar } from '@angular/material';
+declare var $ : any;
 
 @Component({
   selector: 'app-credentials',
@@ -12,7 +13,10 @@ import { MatSnackBar } from '@angular/material';
 export class CredentialsComponent implements OnInit {
   addCrdenetialForm : FormGroup;
   credentials : [] = null;
-  isLoaded : Boolean = false;
+  isLoaded : boolean = false;
+  credentialForm : FormGroup;
+  readonly : boolean =false;
+  hideKey : boolean = true;
 
   constructor(private fb : FormBuilder, private service : CredentialsService, private authService : AuthService,
   private snackbar : MatSnackBar ) {
@@ -22,15 +26,35 @@ export class CredentialsComponent implements OnInit {
 
     });
 
-    this.getAllCredentials();
+    this.credentialForm = this.fb.group({
+      name : ['',[Validators.required]],
+      key : ['', [Validators.required]]
+    }); 
+    
+    
    }
 
   ngOnInit() {
+    $(document).ready(function(){ 
+     
+
+      $('.editName').on('click',function(){
+        console.log('name clcked');
+      });
+      
+        $('.editCredential').on('click',function(){
+          console.log('edit pressed');
+          console.log($('.editCredential').index(this));
+         // $('#name').contentEditable = true;
+         // $(this).contentEditable   = true;
+        });
+    });
+
+    this.getAllCredentials();
   }
 
   //addCredentials
   addCredential(){
-    console.log(this.authService.getUserId());
     this.service.addCredential(this.authService.getUserId(), this.addCrdenetialForm.value)
     .then((res)=>{
     this.snackbar.open(res,'',{
@@ -38,6 +62,7 @@ export class CredentialsComponent implements OnInit {
     });
     })
     .then(()=>{
+      this.addCrdenetialForm.reset();
       this.getAllCredentials();
     })
 
@@ -52,6 +77,71 @@ export class CredentialsComponent implements OnInit {
       this.credentials = res;
       })
       .then(()=> this.isLoaded = true);
+  }
+
+  //delete Credential
+  deleteCredential(cid, cname){
+    let snackbarRef = this.snackbar.open('Delete : '+cname+' ?','Delete', {
+      duration : 2000
+    });
+    snackbarRef.onAction().subscribe(()=>{
+
+    this.service.deleteCredential(this.authService.getUserId(), cid)
+    .then((res)=>{
+      this.snackbar.open(res,'',{
+        duration : 2000
+      });
+    })
+    .then(()=> {this.getAllCredentials()})
+    .catch((err)=>{
+      this.snackbar.open(err,'',{
+        duration : 2000
+      });
+    });
+    });
+  }
+
+  showKey(event){
+    var li = event.target.closest('li');
+    var nodes = Array.from( li.closest('ul').children );
+    var index = nodes.indexOf(li);
+    $('.editKey').attr('type', 'password');
+    $('.keyHideBtn mat-icon').text('visibility_off');
+    $('.editKey').eq(index).attr('type', 'text');
+    $('.keyHideBtn mat-icon').eq(index).text('visibility');
+  }
+
+  editCredential(event){
+    var li = event.target.closest('li');
+    var nodes = Array.from( li.closest('ul').children );
+    var index = nodes.indexOf(li);
+    $('.editName').attr('readonly', true);
+    $('.editKey').attr('readonly', true);
+    $('.editCredential').css("color", "primary");
+    $('.saveCredential').css("color", "primary");
+    $('.editName').eq(index).attr('readonly', false);
+    $('.editKey').eq(index).attr('readonly', false);
+    $('.editCredential').eq(index).css("color", "grey");
+    $('.saveCredential').eq(index).css("color", "red");
+  }
+
+  saveCredential(event, cid){
+    var li = event.target.closest('li');
+    var nodes = Array.from( li.closest('ul').children );
+    var index = nodes.indexOf(li);
+    this.credentialForm.value.name = $('.editName').eq(index).val();
+    this.credentialForm.value.key = $('.editKey').eq(index).val();
+    this.service.updateCredential(cid, this.credentialForm.value)
+    .then((res)=>{
+      this.snackbar.open(res,'', {
+        duration : 2000
+      });
+      $('.editName').attr('readonly', true);
+      $('.editKey').attr('readonly', true);
+      $('.editCredential').css("color", "primary");
+      $('.saveCredential').css("color", "primary");
+      this.getAllCredentials();
+    })
   }
 
 }

@@ -18,7 +18,7 @@ export class GoalsComponent implements OnInit {
 
  isTasksLoaded : boolean =false;
  addGoalForm : FormGroup;
- todayDate=new Date();
+ todayDate =new Date();
  taskCompletedForm : FormGroup;
 
   constructor(private service : GoalsService, private authService : AuthService, private fb : FormBuilder,
@@ -41,11 +41,11 @@ export class GoalsComponent implements OnInit {
     $(document).ready(function(){
       $(this).scrollTop(0);
       $('.menu .btn').removeClass('active');
-      $('.menu .btn').eq(sessionStorage.getItem('activeMenuIndex')).addClass('active')
+      $('.menu .btn').eq(localStorage.getItem('activeMenuIndex')).addClass('active')
       $('.menu .btn').click(function() {
         $('.menu .btn').removeClass('active');
         $(this).addClass('active');
-        sessionStorage.setItem('activeMenuIndex', $('.menu .btn').index(this));
+        localStorage.setItem('activeMenuIndex', $('.menu .btn').index(this));
         
       });
 
