@@ -114,11 +114,15 @@ export class CredentialsComponent implements OnInit {
   editCredential(event){
     var li = event.target.closest('li');
     var nodes = Array.from( li.closest('ul').children );
-    var index = nodes.indexOf(li);
+    var index = nodes.indexOf(li);    
+    $('li label').css('background-color', 'powderblue');
+    $('li label').eq(3 * index).css('background-color', 'cadetblue');
+    $('li label').eq((3 * index) +1).css('background-color', 'cadetblue');
+    $('li label').eq((3 * index) +2).css('background-color', 'cadetblue');
     $('.editName').attr('readonly', true);
     $('.editKey').attr('readonly', true);
-    $('.editCredential').css("color", "primary");
-    $('.saveCredential').css("color", "primary");
+    $('.editCredential').css("color", "blue");
+    $('.saveCredential').css("color", "blue");
     $('.editName').eq(index).attr('readonly', false);
     $('.editKey').eq(index).attr('readonly', false);
     $('.editCredential').eq(index).css("color", "grey");
@@ -131,17 +135,23 @@ export class CredentialsComponent implements OnInit {
     var index = nodes.indexOf(li);
     this.credentialForm.value.name = $('.editName').eq(index).val();
     this.credentialForm.value.key = $('.editKey').eq(index).val();
-    this.service.updateCredential(cid, this.credentialForm.value)
-    .then((res)=>{
-      this.snackbar.open(res,'', {
-        duration : 2000
-      });
-      $('.editName').attr('readonly', true);
-      $('.editKey').attr('readonly', true);
-      $('.editCredential').css("color", "primary");
-      $('.saveCredential').css("color", "primary");
-      this.getAllCredentials();
-    })
-  }
+    if(!(this.credentialForm.value.name) || !(this.credentialForm.value.key)){
+        this.snackbar.open('[Error] : Empty values cannot be stored','', {
+          duration : 2000
+        });
+    }else{
+          this.service.updateCredential(cid, this.credentialForm.value)
+          .then((res)=>{
+            this.snackbar.open(res,'', {
+              duration : 2000
+            });
+            $('.editName').attr('readonly', true);
+            $('.editKey').attr('readonly', true);
+            $('.editCredential').css("color", "blue");
+            $('.saveCredential').css("color", "blue");
+            this.getAllCredentials();
+          });
+        }
+}
 
 }
