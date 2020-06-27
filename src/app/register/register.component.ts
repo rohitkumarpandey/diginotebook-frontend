@@ -50,7 +50,7 @@ export class RegisterComponent implements OnInit {
     else{
     this.service.registerService(this.registerationForm.value)
     .then((res)=>{
-       if(res.success){
+       if(res.success && res.token){
       //fetch userid from form and added to the local  storage
     this.authService.setUserId(this.registerationForm.value.userid);
     //fetching password from form and added to the local  storage
@@ -59,7 +59,8 @@ export class RegisterComponent implements OnInit {
     this.authService.setUsername(res.username);
     //setting userid  from response
     this.authService.setUserId(res.userid);
-    
+    //setting token from response
+    this.authService.setToken(res.token);
     this.router.navigateByUrl('/home');
       }else{
         this.errorMessage = "";

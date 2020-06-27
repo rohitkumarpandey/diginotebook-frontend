@@ -36,10 +36,20 @@ export class AuthService {
   setUsername(username){
     localStorage.setItem('username', username);
   }
+  //get Token
+  getToken(){
+    return localStorage.getItem('token');
+  }
+
+  //set Token
+  setToken(token){
+    localStorage.setItem('token', token);
+  }
+
 
   //isLoggedIn
   isLoggedIn(){
-    return this.getUserId() && this.getPassword();
+    return this.getUserId() && this.getPassword() && this.getToken();
   }
 
   //logout

@@ -115,10 +115,10 @@ export class CredentialsComponent implements OnInit {
     var li = event.target.closest('li');
     var nodes = Array.from( li.closest('ul').children );
     var index = nodes.indexOf(li);    
-    $('li label').css('background-color', 'powderblue');
-    $('li label').eq(3 * index).css('background-color', 'cadetblue');
-    $('li label').eq((3 * index) +1).css('background-color', 'cadetblue');
-    $('li label').eq((3 * index) +2).css('background-color', 'cadetblue');
+    $('li label').css('background-color', 'whitesmoke');
+    $('li label').eq(3 * index).css('background-color', 'white');
+    $('li label').eq((3 * index) +1).css('background-color', 'white');
+    $('li label').eq((3 * index) +2).css('background-color', 'white');
     $('.editName').attr('readonly', true);
     $('.editKey').attr('readonly', true);
     $('.editCredential').css("color", "blue");
@@ -140,7 +140,7 @@ export class CredentialsComponent implements OnInit {
           duration : 2000
         });
     }else{
-          this.service.updateCredential(cid, this.credentialForm.value)
+          this.service.updateCredential(this.authService.getUserId(), cid, this.credentialForm.value)
           .then((res)=>{
             this.snackbar.open(res,'', {
               duration : 2000

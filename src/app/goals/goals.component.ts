@@ -16,10 +16,11 @@ export class GoalsComponent implements OnInit {
  completedTasksArray : [] = null;
  message : string = "You do not set any task yet fe";
 
- isTasksLoaded : boolean =false;
+ isTasksLoaded : boolean = false;
  addGoalForm : FormGroup;
  todayDate =new Date();
  taskCompletedForm : FormGroup;
+ showCompletedTasks : boolean = false;
 
   constructor(private service : GoalsService, private authService : AuthService, private fb : FormBuilder,
      private snackbar : MatSnackBar, private router : Router) { 
@@ -40,35 +41,30 @@ export class GoalsComponent implements OnInit {
   ngOnInit() {
     $(document).ready(function(){
       $(this).scrollTop(0);
-      $('.menu .btn').removeClass('active');
-      $('.menu .btn').eq(localStorage.getItem('activeMenuIndex')).addClass('active')
       $('.menu .btn').click(function() {
         $('.menu .btn').removeClass('active');
-        $(this).addClass('active');
-        localStorage.setItem('activeMenuIndex', $('.menu .btn').index(this));
-        
+        $(this).addClass('active');        
       });
-
     });
     this.loadAllPendingTasks();
   }
   //load all tasks
   loadAllPendingTasks(){
     if(this.authService.isLoggedIn()) this.router.navigateByUrl('/home');
-    
+    this.taskCompletedForm.reset();
     this.tasks = null;
     this.isTasksLoaded = false;
+    this.showCompletedTasks = false;
     this.service.getPendingTasks(this.authService.getUserId())
     .then((res)=>{
         if(res.length !=0) {
           this.tasks = res;
-          this.message = null;
         }
 
-        //this.message = res.toString();
     
     }).then(()=>{
       this.isTasksLoaded = true;
+      if(this.tasks == null) this.message = 'You do not have any task';
     })
   }
 
@@ -79,8 +75,12 @@ export class GoalsComponent implements OnInit {
     .then((res)=>{
         this.snackbar.open(res,'Ok', {
           duration : 3000
-        })
-        this.loadAllPendingTasks();
+        });
+        
+    })
+    .then(()=>{
+      this.addGoalForm.reset();
+      this.loadAllPendingTasks();
     })
     .catch();
   }
@@ -100,7 +100,7 @@ export class GoalsComponent implements OnInit {
           duration : 1500
         });
 
-        this.loadAllPendingTasks();
+        this.showCompletedTasks ? this.getAllCompletedTasks() : this.loadAllPendingTasks();
       })
     });}
   }
@@ -114,7 +114,7 @@ export class GoalsComponent implements OnInit {
       });
       snackbarref.onAction().subscribe(()=>{
         this.taskCompletedForm.value.taskCompleted = true;
-        this.service.taskCompleted(tid, this.taskCompletedForm.value)
+        this.service.taskCompleted(this.authService.getUserId(), tid, this.taskCompletedForm.value)
         .then((res)=>{
           this.snackbar.open(res,'',{
             duration : 2000});
@@ -125,31 +125,29 @@ export class GoalsComponent implements OnInit {
             this.loadAllPendingTasks();
         })
       });
-      // console.log('after dismissed');
-      // snackbarref.afterDismissed().subscribe(()=>{
-        
-      //   if(!this.taskCompletedForm.value.taskCompleted){
-         
-      //     //this.taskCompletedForm.value.taskCompleted = false;
-      //   }
-      // });
       }
    
   }
 
   //load all completed tasks
   getAllCompletedTasks(){
-    this.message = null;
+    this.isTasksLoaded  = false;
+    this.tasks = null;
     this.completedTasksArray = null;
+    this.message = null;
     this.service.getAllCompletedTasks(this.authService.getUserId())
     .then((res)=>{
       if(res.length !=0 ){
       this.completedTasksArray = res;
-      console.log(this.completedTasksArray);
-      }else{
-        this.message = 'You have not completed any task yet fe';
       }
-    }).catch(err=>{this.message = err});
+    })
+    .then(()=>{
+      if(this.completedTasksArray == null) this.message = 'You have not completed any task';
+      this.showCompletedTasks = true;
+      this.isTasksLoaded = true;
+      
+    })
+    .catch(err=>{this.message = err});
 
   }
 

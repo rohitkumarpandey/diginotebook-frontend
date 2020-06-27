@@ -14,7 +14,6 @@ export class RegisterService {
     return this.http.post(environment.baseUrl+'/register', data)
     .toPromise()
     .then((res : any)=>{
-        console.log(res);
         return res;
     })
     .catch()

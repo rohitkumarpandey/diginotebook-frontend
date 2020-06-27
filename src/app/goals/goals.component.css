@@ -66,11 +66,14 @@ div.goals{
     padding-top: 20px;
     
 }
-h3{
+h4{
     text-align: center;
     color: lightslategrey;
 }
 
+#goalname{
+    text-align: left;
+}
 div.goals ul{
     list-style-type: none;
     padding-left: 0;

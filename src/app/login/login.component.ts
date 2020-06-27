@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
     this.showProgressBar = true;
     this.service.loginService(this.loginForm.value)
     .then((res)=>{
-      if(res.success){
+      if(res.success && res.token){
       //fetch userid from form and added to the local  storage
     this.authService.setUserId(this.loginForm.value.userid);
     //fetching password from form and added to the local  storage
@@ -58,12 +58,16 @@ export class LoginComponent implements OnInit {
     this.authService.setUsername(res.username);
     //setting userid  from response
     this.authService.setUserId(res.userid);
+
+    this.authService.setToken(res.token);
     
     this.router.navigateByUrl('/home');
 
     this.showProgressBar = false;
       }else{
-        this._snackbar.open(res.errorMessage,'',{ duration : 2000});
+        if(res.errorMessage) this._snackbar.open(res.errorMessage,'',{ duration : 2000});
+        else this._snackbar.open('Something went wrong','',{ duration : 2000});
+        this.showProgressBar = false;
       }
 
     })
