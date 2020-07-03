@@ -54,9 +54,10 @@
              
               
             <h4 id="goalname">{{completeTask.taskname}}</h4>
-            <h5>Deadline on : {{completeTask.deadline | date : 'fullDate'}}</h5>
-            <h5>Priority: {{completeTask.priority}}</h5>
-            <h5>Created On: {{completeTask.createdOn | date : 'fullDate'}}</h5>
+            <h5>Deadline : {{completeTask.deadline | date : 'fullDate'}}</h5>
+            <h5>Priority : {{completeTask.priority}}</h5>
+            <h5>Completed : {{completeTask.taskStatus.completionDate | date : 'fullDate'}}</h5>
+            <h5>Created : {{completeTask.createdOn | date : 'fullDate'}}</h5>
             <!-- <form [formGroup]="taskCompletedForm">
           </form> -->
         </div>

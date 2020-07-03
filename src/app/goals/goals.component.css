@@ -81,14 +81,14 @@ div.goals ul{
 
 div.goals ul li{
    width: 100%;
-   padding-left: 5%;
+   padding-left: 25%;
    height: 160px;
 }
 
 div.goals ul li .goal{
     
     background-color: white;
-    width: 50%;
+    width: 70%;
     padding: .2em;
     padding-left: 1em;
     box-shadow: 5px 5px 10px lightslategrey;
@@ -102,6 +102,7 @@ div.goals ul li .goal .options {
 mat-icon{
     z-index: -1;
     vertical-align: middle;
+    cursor: pointer;
 }
 
 div.goals ul li .goal h4{

@@ -54,21 +54,25 @@ export class RegisterComponent implements OnInit {
       //fetch userid from form and added to the local  storage
     this.authService.setUserId(this.registerationForm.value.userid);
     //fetching password from form and added to the local  storage
-    this.authService.setPassword(this.registerationForm.value.password);
+    //this.authService.setPassword(this.registerationForm.value.password);
     //seting username from response
     this.authService.setUsername(res.username);
     //setting userid  from response
     this.authService.setUserId(res.userid);
     //setting token from response
     this.authService.setToken(res.token);
-    this.router.navigateByUrl('/home');
       }else{
         this.errorMessage = "";
         this.errorMessage = res.errorMessage;
+        throw new Error('Error occured');
       }
-    }).then(()=>{
-      this.isLoaded = true;
     })
+    .then(()=>{      
+      this.isLoaded = true;
+      window.location.reload();
+    })
+    .then(()=> setTimeout(()=>this.router.navigateByUrl('/home'), 500))
+    .catch((err)=>console.log(err));
   }
 }
 

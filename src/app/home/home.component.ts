@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
+import { HomeService } from './home.service';
 declare var $ : any;
 
 @Component({
@@ -11,10 +12,12 @@ declare var $ : any;
 export class HomeComponent implements OnInit {
   username = "";
   activeLink = null;
-  constructor(private authService : AuthService, private router : Router) {
+  constructor(private authService : AuthService, private router : Router, private service : HomeService) {
     if(!this.authService.isLoggedIn()){
         this.router.navigateByUrl('/login'); 
     }
+    
+    
    }
 
   ngOnInit() {
@@ -31,12 +34,17 @@ export class HomeComponent implements OnInit {
 
     });
     this.username = this.authService.getUsername();
+    
   }
 
  logout(){
-   if(this.authService.logout()){
-     this.router.navigateByUrl('/login');
+  if(this.authService.logout()){
+    
+    this.router.navigateByUrl('/login');
+     
    }
+ 
+   
  }
 
 }

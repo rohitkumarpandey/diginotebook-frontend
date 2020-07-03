@@ -19,7 +19,7 @@ export class GoalsService {
       headers : this.header
     })
     .toPromise()
-    .then((res)=>{
+    .then((res : any)=>{
         return res;
     }).catch();
   }

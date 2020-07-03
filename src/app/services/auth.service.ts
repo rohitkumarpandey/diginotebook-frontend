@@ -17,15 +17,15 @@ export class AuthService {
     localStorage.setItem('userid', uid);
   }
 
-  //get password
-  getPassword(){
-    return localStorage.getItem('password');
-  }
+  // //get password
+  // getPassword(){
+  //   return localStorage.getItem('password');
+  // }
 
-  //set password
-  setPassword(password){
-    localStorage.setItem('password', password);
-  }
+  // //set password
+  // setPassword(password){
+  //   localStorage.setItem('password', password);
+  // }
 
   //get username
   getUsername(){
@@ -49,11 +49,14 @@ export class AuthService {
 
   //isLoggedIn
   isLoggedIn(){
-    return this.getUserId() && this.getPassword() && this.getToken();
+    return this.getUserId() && this.getToken();
   }
 
   //logout
   logout(){
+    localStorage.removeItem('userid');
+    localStorage.removeItem('username');
+    localStorage.removeItem('token');
     localStorage.clear();
     return true;
   }

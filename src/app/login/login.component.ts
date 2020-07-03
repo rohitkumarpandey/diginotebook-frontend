@@ -32,8 +32,8 @@ export class LoginComponent implements OnInit {
   constructor(private fb : FormBuilder, private authService : AuthService, private router : Router, private service : LoginService
     , private _snackbar : MatSnackBar) {
     this.loginForm = this.fb.group({
-      userid:['', [Validators.required, Validators.email]],
-      password : ['', [Validators.required, Validators.minLength(6)]]
+      userid:['alexa@gmail.com', [Validators.required, Validators.email]],
+      password : ['123456', [Validators.required, Validators.minLength(6)]]
     });
      //if user is already logged in
      if(this.authService.isLoggedIn()){
@@ -49,32 +49,27 @@ export class LoginComponent implements OnInit {
     this.showProgressBar = true;
     this.service.loginService(this.loginForm.value)
     .then((res)=>{
-      if(res.success && res.token){
+      if(res.success){
       //fetch userid from form and added to the local  storage
-    this.authService.setUserId(this.loginForm.value.userid);
-    //fetching password from form and added to the local  storage
-    this.authService.setPassword(this.loginForm.value.password);
-    //seting username from response
-    this.authService.setUsername(res.username);
-    //setting userid  from response
-    this.authService.setUserId(res.userid);
-
-    this.authService.setToken(res.token);
-    
-    this.router.navigateByUrl('/home');
-
-    this.showProgressBar = false;
-      }else{
+      this.authService.setUserId(res.userid);
+      //seting username from response
+      this.authService.setUsername(res.username);
+      //setting userid  from response
+      this.authService.setUserId(res.userid);
+      //setting token from response
+      this.authService.setToken(res.token);
+      
+  }else{
         if(res.errorMessage) this._snackbar.open(res.errorMessage,'',{ duration : 2000});
         else this._snackbar.open('Something went wrong','',{ duration : 2000});
         this.showProgressBar = false;
+        throw new Error('Login Failed');
       }
 
     })
-
-    
-
-
+    .then(()=>{this.showProgressBar = false; window.location.reload();})
+    .then(()=> setTimeout(()=>this.router.navigateByUrl('/home'), 500))
+    .catch((err)=>console.log(err));
   }
 
 

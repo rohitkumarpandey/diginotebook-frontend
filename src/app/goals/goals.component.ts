@@ -12,9 +12,9 @@ declare var $ : any;
   styleUrls: ['./goals.component.css']
 })
 export class GoalsComponent implements OnInit {
- tasks : [] = null;
- completedTasksArray : [] = null;
- message : string = "You do not set any task yet fe";
+ tasks : [];
+ completedTasksArray : [];
+ message : string = null;;
 
  isTasksLoaded : boolean = false;
  addGoalForm : FormGroup;
@@ -47,24 +47,26 @@ export class GoalsComponent implements OnInit {
       });
     });
     this.loadAllPendingTasks();
+    
   }
   //load all tasks
   loadAllPendingTasks(){
     if(this.authService.isLoggedIn()) this.router.navigateByUrl('/home');
     this.taskCompletedForm.reset();
-    this.tasks = null;
+    this.tasks = [];
     this.isTasksLoaded = false;
     this.showCompletedTasks = false;
+    this.message = null;
     this.service.getPendingTasks(this.authService.getUserId())
     .then((res)=>{
-        if(res.length !=0) {
+        if(res.length != 0) {
           this.tasks = res;
         }
 
     
     }).then(()=>{
       this.isTasksLoaded = true;
-      if(this.tasks == null) this.message = 'You do not have any task';
+      if(this.tasks.length == 0) this.message = 'You do not have any task';
     })
   }
 
@@ -131,24 +133,26 @@ export class GoalsComponent implements OnInit {
 
   //load all completed tasks
   getAllCompletedTasks(){
-    this.isTasksLoaded  = false;
-    this.tasks = null;
-    this.completedTasksArray = null;
-    this.message = null;
-    this.service.getAllCompletedTasks(this.authService.getUserId())
-    .then((res)=>{
-      if(res.length !=0 ){
-      this.completedTasksArray = res;
-      }
-    })
-    .then(()=>{
-      if(this.completedTasksArray == null) this.message = 'You have not completed any task';
-      this.showCompletedTasks = true;
-      this.isTasksLoaded = true;
-      
-    })
-    .catch(err=>{this.message = err});
-
+    if(!this.showCompletedTasks){
+          this.isTasksLoaded  = false;
+          this.tasks = [];
+          this.completedTasksArray = [];
+          this.message = null;
+          this.service.getAllCompletedTasks(this.authService.getUserId())
+          .then((res)=>{
+            if(res.length !=0 ){
+            this.completedTasksArray = res;
+            }
+          })
+          .then(()=>{
+            if(this.completedTasksArray.length == 0) this.message = 'You have not completed any task';
+            this.showCompletedTasks = true;
+            this.isTasksLoaded = true;
+            
+          })
+          .catch(err=>{this.message = err});
+    }
   }
+
 
 }
