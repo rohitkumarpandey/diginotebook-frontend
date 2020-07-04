@@ -1,0 +1,99 @@
+<mat-progress-bar mode="indeterminate" *ngIf="!isLoaded"></mat-progress-bar>
+<button id="addNoteBtn" *ngIf ="isLoaded" mat-fab  color="primary" matTooltip="Add Note" aria-label="Add Note" data-toggle="modal" data-target="#addModal">
+  <mat-icon >add</mat-icon>
+</button>
+<div class="notes-container">
+    <ng-container *ngIf="notes">
+    <ul *ngFor="let note of notes">
+        <li >
+            <div class="note" (click)="openNote(note._id)" >
+                <span>{{note.title}}</span> | <span>{{note.createdOn | date : 'medium'}}</span>
+            <br>
+            <span>Last updated : {{note.lastUpdated | date : 'medium'}}</span></div>
+        </li>
+    </ul>
+</ng-container>
+<strong *ngIf="message!=null">{{message}}</strong>
+</div>
+
+
+ <!-- Modal -->
+ <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span style="color: red;">&times;</span></button>
+          
+            <input #noteTitle class="modal-title" (input)="updateNote(noteTitle.value, noteEditor.value)">
+        </div>
+        <div class="modal-body">
+            <textarea #noteEditor (input)="updateNote(noteTitle.value, noteEditor.value)"></textarea>
+        </div>
+        <div class="modal-footer">
+            <strong id="saved" >Saved</strong>
+            <strong class="text-danger" *ngIf="emptyValue">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*Cannot save empty values</strong>
+            <mat-icon color="warn" matTooltip="Delete" aria-label="Delete"  data-toggle="modal" data-target="#deleteModal">delete</mat-icon>
+        </div>
+    
+      </div>
+      
+    </div>
+  </div>
+
+
+  
+ <!-- Modal -->
+ <div class="modal fade" id="deleteModal" role="dialog">
+  <div class="modal-dialog">
+  
+    <!-- Modal content-->
+    <div class="modal-content">
+      
+      <div class="modal-body">
+         <strong>Are you sure want to delete ?</strong>&nbsp;
+          <button class="btn-sm btn-danger" (click)="deleteNote()">Delete</button>&nbsp;
+          <button class="btn-sm btn-success" data-dismiss="modal">No</button>
+      </div>
+      
+  
+    </div>
+    
+  </div>
+</div>
+
+
+
+  
+ <!-- Modal -->
+ <div class="modal fade" id="addModal" role="dialog">
+  <div class="modal-dialog">
+  
+    <!-- Modal content-->
+    <div class="modal-content">
+      
+      <div class="modal-body">
+        <form [formGroup]="noteForm" class="form">
+          <div class="form-group">
+            <label> Title:</label>
+            <input class="form-control" formControlName="title">
+          </div>
+          <div class="form-group">
+            <label> Description:</label>
+            <textarea class="form-control" formControlName="note" rows="15"></textarea> 
+          </div>
+          <div class="form-group">
+          <button type="button" class="btn-sm btn-success" style="cursor: pointer;"  [disabled]="noteForm.invalid" (click)="addNote()">Add Note</button>
+          </div>
+        </form>
+      </div>
+      
+  
+    </div>
+    
+  </div>
+</div>
+
+
+

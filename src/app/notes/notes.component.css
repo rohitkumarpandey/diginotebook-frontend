@@ -1,0 +1,112 @@
+/* for mobile */
+@media only screen and (max-width: 600px) and (orientation : portrait){
+
+    ul li{
+        width: 100%!important;
+        padding: 20px!important;
+       
+    }
+    .note{
+        width: 100%!important;
+    }
+}
+
+#addNoteBtn{
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+    opacity: .9;
+}
+
+.notes-container{
+    width: 100%;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+ul{
+    list-style-type: none;
+    padding: 0;
+}
+ul li{
+    width: 100%;
+   padding-left: 25%;
+   height: 80px;
+}
+.note{
+    text-align: left;
+    background-color: white;
+    width: 70%;
+    padding: .8em;
+    height:70px;
+    padding-left: 1em;
+    box-shadow: 5px 5px 10px lightslategrey;
+    cursor: pointer;
+}
+
+.note span:nth-child(1){
+    text-transform: capitalize;
+    font-weight: bolder;
+    color: cadetblue;
+   
+}
+
+.note span:nth-child(2){
+    font-weight: bold;
+    color: darkslategray;
+    
+}
+.note span:last-child{
+    font-weight: lighter;
+    color: grey;
+}
+#myModal input{
+    border: 0;
+}
+
+.modal-content, .modal-title{
+    text-align: left;
+}
+
+.modal-body textarea{
+    width: 100%;
+    min-height: 50%;
+    max-height: 80%;
+    padding: 1em;
+    font-weight: bold;
+
+}
+
+.modal-footer{
+    text-align: left;
+}
+
+.unsavedNote{
+    font-weight: lighter;
+    color: grey;
+    opacity: .75;
+}
+.savedNote{
+    color: green;
+    font-weight: bolder;
+    opacity: 1;
+
+}
+
+mat-icon {
+    cursor: pointer;
+    float: right;
+}
+
+#deleteModal .modal-body{
+    padding-left: 0;
+
+    
+}
+
+#addModal{
+    text-align: left;
+}
+
+
+

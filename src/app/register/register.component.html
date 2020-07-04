@@ -1,0 +1,54 @@
+
+<div class="container-fluid register-container">
+  
+    
+    <label>D!GI Notebook</label>
+    <div class="container-fluid register-form-container">
+        
+  <form class="form" [formGroup]="registerationForm">
+  
+  
+  
+    <mat-form-field class="full-width">
+      <mat-label>Email</mat-label>
+      <input formControlName="userid" matInput type="email" [errorStateMatcher]="matcher">
+      <mat-error *ngIf = "registerationForm.controls.userid.hasError('email') && !registerationForm.controls.userid.hasError('required')">
+        Please Enter a valid email address</mat-error>
+        <mat-error *ngIf="registerationForm.controls.userid.hasError('required')">
+        Email is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+    
+    <mat-form-field class="full-width">
+        <mat-label>Name</mat-label>
+        <input formControlName="username" matInput type="text">
+        <mat-error *ngIf="registerationForm.controls.username.hasError('required')">
+          Name is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+  
+    <mat-form-field class="full-width">
+      <mat-label>Password</mat-label>
+      <input formControlName="password" matInput [type]="hide ? 'password' : 'text'" placeholder="Enter Password">
+      <button ng-show="this.loginForm.controls.password.dirty==true" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+      
+    </mat-form-field>
+    
+    <div class="container-fluid" >
+      <a mat-raised-button (click)="register()" [disabled]="registerationForm.invalid">Register</a>
+    </div>
+      
+    
+  <div class="container-fluid loginLink">
+    <p>Have account? <a href="#" [routerLink]="['/login']">Login</a></p>
+  </div>
+  <strong *ngIf="errorMessage!=null">{{errorMessage}}</strong>
+    
+  
+  </form>
+  <mat-progress-bar mode="indeterminate" *ngIf="!isLoaded"></mat-progress-bar>
+    </div>
+</div>
+  

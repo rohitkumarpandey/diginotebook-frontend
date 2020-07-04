@@ -1,0 +1,114 @@
+<div class="menu">
+    <a class="btn active" (click)="loadAllPendingTasks()">ALL</a>
+    <a class="btn" (click)="getAllCompletedTasks()">COMPLETED</a>
+</div>
+<mat-progress-bar mode="indeterminate" *ngIf="!isTasksLoaded"></mat-progress-bar>
+<button id="addGoalBtn" *ngIf = "!showCompletedTasks" mat-fab  color="primary" matTooltip="Add Goal" aria-label="Add" data-toggle="modal" data-target="#myModal">
+    <mat-icon >add</mat-icon>
+</button>
+<div class="container-fluid goals">
+    <h4 *ngIf="message!=null">{{message}}</h4>
+    <ng-container *ngIf = "!showCompletedTasks && tasks">
+    <ul *ngFor="let task of tasks" >
+        <li>
+            <div class="goal">
+                <div class="options">
+                    
+                        <mat-icon color="white" matTooltip="Bookmark" aria-label="Edit">edit</mat-icon>
+                        
+                     
+                        
+                            <mat-icon   matTooltip="Bookmark" aria-label="Bookmark">bookmark</mat-icon>
+                            
+                         
+                          
+                            <mat-icon mat-mini-fab color="warn"  matTooltip="Delete" aria-label="Delete" (click)="deleteTask(task._id, task.taskname)">delete</mat-icon>
+                            
+                          
+                </div>
+               
+                 
+                  
+                <h4 id="goalname">{{task.taskname}}</h4>
+                <h5>Deadline on : {{task.deadline | date : 'fullDate'}}</h5>
+                <h5>Priority: {{task.priority}}</h5>
+                <h5>Created On: {{task.createdOn | date : 'fullDate'}}</h5>
+                <form [formGroup]="taskCompletedForm">
+                <mat-slide-toggle formControlName = "taskCompleted" checked= "false" (change)="completedTask($event, task._id)">COMPLETED</mat-slide-toggle>
+              </form>
+            </div>
+        </li>
+      
+    </ul>
+</ng-container>
+
+ <!-- show completedTask -->
+ <ng-container *ngIf = "showCompletedTasks">
+  <ul *ngFor="let completeTask of completedTasksArray" >
+    <li>
+        <div class="goal">
+            <div class="options">
+            <mat-icon mat-mini-fab color="warn"  matTooltip="Delete" aria-label="Delete" (click)="deleteTask(completeTask._id, completeTask.taskname)">delete</mat-icon>
+            </div>
+           
+             
+              
+            <h4 id="goalname">{{completeTask.taskname}}</h4>
+            <h5>Deadline : {{completeTask.deadline | date : 'fullDate'}}</h5>
+            <h5>Priority : {{completeTask.priority}}</h5>
+            <h5>Completed : {{completeTask.taskStatus.completionDate | date : 'fullDate'}}</h5>
+            <h5>Created : {{completeTask.createdOn | date : 'fullDate'}}</h5>
+            <!-- <form [formGroup]="taskCompletedForm">
+          </form> -->
+        </div>
+    </li>
+  
+</ul>
+ </ng-container>
+</div>
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span style="color: red;">&times;</span></button>
+          <h4 class="modal-title">Add Goal</h4>
+        </div>
+        <div class="modal-body">
+         <form [formGroup]="addGoalForm" >
+             <div class="form-group">
+                 <label>Goal/Task Name:</label>
+                 <input class="form-control" type="text" formControlName="taskname">
+                 <p class="text-danger" *ngIf="addGoalForm.controls.taskname.hasError('required') && addGoalForm.controls.taskname.dirty">Goal is <strong>required</strong></p>
+             </div>
+
+             <div class="form-group">
+                <label>Deadline:</label>
+                <input class="form-control" type="date" formControlName="deadline" min="{{todayDate | date: 'yyyy-MM-dd'}}" >
+                <p class="text-danger" *ngIf="addGoalForm.controls.deadline.hasError('required') && addGoalForm.controls.deadline.dirty">Deadline date is <strong>required</strong></p>
+
+            </div>
+            <div class="form-group">
+                <label>Priority:</label>
+                <select class="form-control" formControlName="priority">
+                    <option value="">Choose Goal Priority</option>
+                    <option value="high">High</option>
+                    <option value="medium">Medium</option>
+                    <option value="low">Low</option>
+                </select>
+                <p class="text-danger" *ngIf="addGoalForm.controls.priority.hasError('required') && addGoalForm.controls.priority.dirty">Priority is <strong>required</strong></p>
+
+            </div>
+         </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" (click)="addGoal()" [disabled]="addGoalForm.invalid" data-dismiss="modal">Add</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+
