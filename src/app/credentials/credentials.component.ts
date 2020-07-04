@@ -92,12 +92,13 @@ export class CredentialsComponent implements OnInit {
         duration : 2000
       });
     })
-    .then(()=> {this.getAllCredentials()})
     .catch((err)=>{
       this.snackbar.open(err,'',{
         duration : 2000
       });
-    });
+    })
+    .finally(()=>this.getAllCredentials());
+    
     });
   }
 

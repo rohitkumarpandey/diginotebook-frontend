@@ -51,6 +51,7 @@ export class GoalsComponent implements OnInit {
   }
   //load all tasks
   loadAllPendingTasks(){
+    
     if(this.authService.isLoggedIn()) this.router.navigateByUrl('/home');
     this.taskCompletedForm.reset();
     this.tasks = [];
@@ -59,15 +60,14 @@ export class GoalsComponent implements OnInit {
     this.message = null;
     this.service.getPendingTasks(this.authService.getUserId())
     .then((res)=>{
-        if(res.length != 0) {
-          this.tasks = res;
-        }
-
-    
-    }).then(()=>{
+        if(res.length != 0) this.tasks = res;    
+    })
+    .then(()=>{
       this.isTasksLoaded = true;
       if(this.tasks.length == 0) this.message = 'You do not have any task';
-    })
+    });
+  
+  
   }
 
   //add goal
@@ -133,7 +133,7 @@ export class GoalsComponent implements OnInit {
 
   //load all completed tasks
   getAllCompletedTasks(){
-    if(!this.showCompletedTasks){
+   
           this.isTasksLoaded  = false;
           this.tasks = [];
           this.completedTasksArray = [];
@@ -151,7 +151,7 @@ export class GoalsComponent implements OnInit {
             
           })
           .catch(err=>{this.message = err});
-    }
+    
   }
 
 

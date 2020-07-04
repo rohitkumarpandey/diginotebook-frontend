@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ReactiveFormsModule, FormGroup } from '@angular/forms';
+import { ReactiveFormsModule, FormGroup, FormsModule } from '@angular/forms';
 
 import {  HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
@@ -31,7 +31,6 @@ import {
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
-import { TasksComponent } from './tasks/tasks.component';
 import { GoalsComponent } from './goals/goals.component';
 import { CredentialsComponent } from './credentials/credentials.component';
 import { NotesComponent } from './notes/notes.component'; 
@@ -42,8 +41,7 @@ import { NotesComponent } from './notes/notes.component';
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    HomeComponent,
-    TasksComponent,
+    HomeComponent, 
     GoalsComponent,
     CredentialsComponent,
     NotesComponent
@@ -51,6 +49,7 @@ import { NotesComponent } from './notes/notes.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
     MatButtonModule,      

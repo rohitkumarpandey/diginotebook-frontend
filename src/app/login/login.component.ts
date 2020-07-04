@@ -68,7 +68,7 @@ export class LoginComponent implements OnInit {
 
     })
     .then(()=>{this.showProgressBar = false; window.location.reload();})
-    .then(()=> setTimeout(()=>this.router.navigateByUrl('/home'), 500))
+    .then(()=> setTimeout(()=>this.router.navigateByUrl('/home'), 1500))
     .catch((err)=>console.log(err));
   }
 

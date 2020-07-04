@@ -71,7 +71,7 @@ export class RegisterComponent implements OnInit {
       this.isLoaded = true;
       window.location.reload();
     })
-    .then(()=> setTimeout(()=>this.router.navigateByUrl('/home'), 500))
+    .then(()=> setTimeout(()=>this.router.navigateByUrl('/home'), 1500))
     .catch((err)=>console.log(err));
   }
 }
