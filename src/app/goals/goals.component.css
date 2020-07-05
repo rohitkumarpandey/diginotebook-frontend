@@ -38,16 +38,17 @@ div.menu{
 
 }
 
-div.menu a{
+div.menu button{
     text-decoration: none;
     padding: 8px;
     white-space: nowrap;
     display: inline-block;
     text-align: center;
+    outline: none;
 
 }
 
-div.menu a:hover, .active{
+.activeBtn{
     background-color: #003152;
     color: white;
 }
@@ -59,10 +60,11 @@ div.menu a:hover, .active{
     opacity: .9;
 }
 
-div.goals{
+div.goal{
     height: 100%;
     text-align: left;
     padding-top: 20px;
+    border-radius: 5px!important;
     
 }
 h4{

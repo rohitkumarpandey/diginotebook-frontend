@@ -41,9 +41,9 @@ export class GoalsComponent implements OnInit {
   ngOnInit() {
     $(document).ready(function(){
       $(this).scrollTop(0);
-      $('.btn').click(function() {
-        $('.btn').removeClass('active');
-        $(this).addClass('active');        
+      $('.menu .btn').click(function() {
+        $('.menu .btn').removeClass('activeBtn');
+        $(this).addClass('activeBtn');        
       });
     });
     this.loadAllPendingTasks();
@@ -51,7 +51,6 @@ export class GoalsComponent implements OnInit {
   }
   //load all tasks
   loadAllPendingTasks(){
-    
     if(this.authService.isLoggedIn()) this.router.navigateByUrl('/home');
     this.taskCompletedForm.reset();
     this.tasks = [];

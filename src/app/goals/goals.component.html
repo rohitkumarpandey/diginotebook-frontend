@@ -1,6 +1,6 @@
 <div class="menu">
-    <a class="btn active" (click)="loadAllPendingTasks()">ALL</a>
-    <a class="btn" (click)="getAllCompletedTasks()">COMPLETED</a>
+    <button id="allBtn" class="btn activeBtn" (click)="loadAllPendingTasks()">ALL</button>&nbsp;
+    <button class="btn" (click)="getAllCompletedTasks()">COMPLETED</button>
 </div>
 <mat-progress-bar mode="indeterminate" *ngIf="!isTasksLoaded"></mat-progress-bar>
 <button id="addGoalBtn" *ngIf = "!showCompletedTasks" mat-fab  color="primary" matTooltip="Add Goal" aria-label="Add" data-toggle="modal" data-target="#myModal">

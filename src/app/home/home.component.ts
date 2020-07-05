@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
     router.events.pipe(
       filter(event => event instanceof NavigationEnd)  
     ).subscribe((event: NavigationEnd) => {
-      $('.btn').removeClass('active');
+      $('.scrollmenu .btn').removeClass('active');
       if(event.url.split('/').pop().includes('goals') || event.url.split('/').pop().includes('home')) $('.scrollmenu .btn').eq(0).addClass('active');      
       else if(event.url.split('/').pop().includes('credentials')) $('.scrollmenu .btn').eq(1).addClass('active');
       else if(event.url.split('/').pop().includes('notes')) $('.scrollmenu .btn').eq(2).addClass('active');

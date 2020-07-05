@@ -8,7 +8,7 @@
         <li >
             <div class="note" (click)="openNote(note._id)" >
                 <span>{{note.title}}</span> | <span>{{note.createdOn | date : 'medium'}}</span>
-            <br>
+            <br><p></p>
             <span>Last updated : {{note.lastUpdated | date : 'medium'}}</span></div>
         </li>
     </ul>
@@ -74,6 +74,7 @@
     <div class="modal-content">
       
       <div class="modal-body">
+        <button type="button" class="close" data-dismiss="modal"><span style="color: red;">&times;</span></button>
         <form [formGroup]="noteForm" class="form">
           <div class="form-group">
             <label> Title:</label>

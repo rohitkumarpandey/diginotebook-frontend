@@ -1,5 +1,5 @@
 /* for mobile */
-@media only screen and (max-width: 600px) and (orientation : portrait){
+@media only screen and (max-width: 600px){
 
     ul li{
         width: 100%!important;
@@ -46,6 +46,7 @@ ul li{
     padding-left: 1em;
     box-shadow: 5px 5px 10px lightslategrey;
     cursor: pointer;
+    border-radius: 5px!important;
 }
 
 .note span:nth-child(1){
@@ -66,18 +67,20 @@ ul li{
 }
 #myModal input{
     border: 0;
+    font-weight: bold;
+    font-size: 20px;
+    color: cadetblue;
 }
 
 .modal-content, .modal-title{
-    text-align: left;
+    text-align: left;    
 }
 
-.modal-body textarea{
+#myModal .modal-body textarea{
     width: 100%;
-    min-height: 50%;
-    max-height: 80%;
+    min-height: 30vh;
+    max-height: 80vh;
     padding: 1em;
-    font-weight: bold;
 
 }
 
