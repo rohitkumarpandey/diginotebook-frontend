@@ -41,8 +41,8 @@ export class GoalsComponent implements OnInit {
   ngOnInit() {
     $(document).ready(function(){
       $(this).scrollTop(0);
-      $('.menu .btn').click(function() {
-        $('.menu .btn').removeClass('active');
+      $('.btn').click(function() {
+        $('.btn').removeClass('active');
         $(this).addClass('active');        
       });
     });
@@ -140,17 +140,15 @@ export class GoalsComponent implements OnInit {
           this.message = null;
           this.service.getAllCompletedTasks(this.authService.getUserId())
           .then((res)=>{
-            if(res.length !=0 ){
-            this.completedTasksArray = res;
-            }
-          })
-          .then(()=>{
-            if(this.completedTasksArray.length == 0) this.message = 'You have not completed any task';
-            this.showCompletedTasks = true;
-            this.isTasksLoaded = true;
+            if(res.success) this.completedTasksArray = res.tasks;
+            else throw new Error(res.errorMessage); 
             
           })
-          .catch(err=>{this.message = err});
+          .catch(err=>{this.message = err.message})
+          .finally(()=>{
+            this.showCompletedTasks = true;
+            this.isTasksLoaded = true;
+          });
     
   }
 

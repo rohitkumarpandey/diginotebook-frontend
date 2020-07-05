@@ -98,7 +98,7 @@ label{
     
   }
   
-.scrollmenu a:hover,.scrollmenu a:visited,.scrollmenu a:active, .active {
+ .active {
    
     border-width: 0px 0px 4px 0px;
     border-color: #003152;

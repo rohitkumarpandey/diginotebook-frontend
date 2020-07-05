@@ -48,6 +48,7 @@ export class NotesComponent implements OnInit {
     this.isLoaded = false;
     this.notes = [];
     this.message = null;
+    this.emptyValue = false;
     this.service.getNotes(this.authService.getUserId())
     .then((result) => {
       if(result.success) this.notes = result.notes; 
