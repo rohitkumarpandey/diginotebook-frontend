@@ -60,6 +60,20 @@ div.menu button{
     opacity: .9;
 }
 
+
+/* ::ng-deep .mat-progress-bar-fill::after {
+    background-color: whitesmoke;
+} */
+
+::ng-deep .mat-progress-bar-buffer {
+    background: whitesmoke;
+}
+
+
+
+div.goals{
+    padding-top: 20px;
+}
 div.goal{
     height: 100%;
     text-align: left;

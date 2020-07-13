@@ -2,7 +2,7 @@
     <button id="allBtn" class="btn activeBtn" (click)="loadAllPendingTasks()">ALL</button>&nbsp;
     <button class="btn" (click)="getAllCompletedTasks()">COMPLETED</button>
 </div>
-<mat-progress-bar mode="indeterminate" *ngIf="!isTasksLoaded"></mat-progress-bar>
+<mat-progress-bar [mode]="progressMode" value = 0></mat-progress-bar>
 <button id="addGoalBtn" *ngIf = "!showCompletedTasks" mat-fab  color="primary" matTooltip="Add Goal" aria-label="Add" data-toggle="modal" data-target="#myModal">
     <mat-icon >add</mat-icon>
 </button>
@@ -30,9 +30,9 @@
                  
                   
                 <h4 id="goalname">{{task.taskname}}</h4>
-                <h5>Deadline on : {{task.deadline | date : 'fullDate'}}</h5>
-                <h5>Priority: {{task.priority}}</h5>
-                <h5>Created On: {{task.createdOn | date : 'fullDate'}}</h5>
+                <h5 [ngStyle]="{color : checkDate(task.deadline) ? 'crimson' : 'blue'}">Deadline on {{task.deadline | date : 'fullDate'}}</h5>
+                <h5>Priority : {{task.priority}}</h5>
+                <h5>Created On {{task.createdOn | date : 'fullDate'}}</h5>
                 <form [formGroup]="taskCompletedForm">
                 <mat-slide-toggle formControlName = "taskCompleted" checked= "false" (change)="completedTask($event, task._id)">COMPLETED</mat-slide-toggle>
               </form>
@@ -82,6 +82,7 @@
                  <label>Goal/Task Name:</label>
                  <input class="form-control" type="text" formControlName="taskname">
                  <p class="text-danger" *ngIf="addGoalForm.controls.taskname.hasError('required') && addGoalForm.controls.taskname.dirty">Goal is <strong>required</strong></p>
+                 <p class="text-danger" *ngIf="addGoalForm.controls.taskname.hasError('maxlength') && addGoalForm.controls.taskname.dirty"><strong>15 characters only.</strong></p>
              </div>
 
              <div class="form-group">

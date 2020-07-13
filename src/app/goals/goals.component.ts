@@ -15,7 +15,7 @@ export class GoalsComponent implements OnInit {
  tasks : [];
  completedTasksArray : [];
  message : string = null;;
-
+progressMode = 'determinate';
  isTasksLoaded : boolean = false;
  addGoalForm : FormGroup;
  todayDate =new Date();
@@ -26,7 +26,7 @@ export class GoalsComponent implements OnInit {
      private snackbar : MatSnackBar, private router : Router) { 
 
     this.addGoalForm = this.fb.group({
-      taskname : ['',[Validators.required]],
+      taskname : ['',[Validators.required, Validators.maxLength(15)]],
       deadline : ['', [Validators.required]],
       priority : ['', [Validators.required]]
     });
@@ -51,6 +51,7 @@ export class GoalsComponent implements OnInit {
   }
   //load all tasks
   loadAllPendingTasks(){
+    this.progressMode = 'indeterminate';
     if(this.authService.isLoggedIn()) this.router.navigateByUrl('/home');
     this.taskCompletedForm.reset();
     this.tasks = [];
@@ -63,6 +64,7 @@ export class GoalsComponent implements OnInit {
     })
     .then(()=>{
       this.isTasksLoaded = true;
+      this.progressMode = 'determinate';
       if(this.tasks.length == 0) this.message = 'You do not have any task';
     });
   
@@ -132,7 +134,7 @@ export class GoalsComponent implements OnInit {
 
   //load all completed tasks
   getAllCompletedTasks(){
-   
+          this.progressMode = 'indeterminate';
           this.isTasksLoaded  = false;
           this.tasks = [];
           this.completedTasksArray = [];
@@ -146,9 +148,15 @@ export class GoalsComponent implements OnInit {
           .catch(err=>{this.message = err.message})
           .finally(()=>{
             this.showCompletedTasks = true;
+            this.progressMode = 'determinate';
             this.isTasksLoaded = true;
           });
     
+  }
+
+
+  checkDate(date){
+    return new Date(date).getTime()  <  new Date().getTime() ? true : false;
   }
 
 

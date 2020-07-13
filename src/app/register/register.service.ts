@@ -9,7 +9,19 @@ export class RegisterService {
 
   constructor(private http : HttpClient) { }
 
+  //send verification code
+  sendVerificationCode(data) : Promise<any>{
+    return this.http.post(environment.baseUrl+'/sendVerificationCode',data)
+    .toPromise()
+    .then(res=> {return res});
+  }
 
+  //verify Email
+  verifyEmail(data) : Promise<any>{
+    return this.http.post(environment.baseUrl+'/verifyEmail',data)
+    .toPromise()
+    .then(res=> {return res});
+  }
   registerService(data):Promise<any>{
     return this.http.post(environment.baseUrl+'/register', data)
     .toPromise()
