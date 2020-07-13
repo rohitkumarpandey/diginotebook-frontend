@@ -1,0 +1,37 @@
+<div class="container-fluid box">
+    <div class="conatiner-fluid profile-container">
+    <strong id="username">Hi&nbsp;{{username}}</strong>
+    <button id="logoutBtn" class="btn btn-sm" data-toggle="modal" data-target="#logoutModal">LogOut</button>
+    </div>  
+<label>D!GI Notebook</label>
+<p>A Digital Notebook that organizes your data at one place.</p>
+
+</div>
+<div class="scrollmenu">
+    <button class="btn"  [routerLink]="['goals']">Goals</button>
+    <button class="btn" [routerLink]="['credentials']">Credentials</button>
+    <button class="btn" [routerLink]="['notes']">Notes</button>
+    <!-- <a class="btn" >Gallery</a> -->
+</div>
+<router-outlet></router-outlet>
+
+  
+  <!-- Delete Modal -->
+  <div class="modal fade" id="logoutModal" role="dialog">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        
+        <div class="modal-body">
+            
+          <strong>LogOut?</strong>
+
+          <button type="button"  class="btn btn-success" data-dismiss="modal">No</button>
+          <button type="button"  class="btn btn-muted" data-dismiss="modal" (click)="logout()">Yes</button>
+
+        </div>
+       
+      </div>
+    </div>
+  </div>
+  
+  

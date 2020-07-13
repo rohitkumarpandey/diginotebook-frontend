@@ -1,0 +1,87 @@
+
+<div class="container-fluid register-container">
+  
+    
+    <label>D!GI Notebook</label>
+    <div class="container-fluid register-form-container">
+        
+  <form class="form" [formGroup]="registerationForm">
+  
+  
+  
+    <mat-form-field class="full-width">
+      <mat-label>Email</mat-label>
+      <input formControlName="userid" matInput type="email" [errorStateMatcher]="matcher">
+      <mat-error *ngIf = "registerationForm.controls.userid.hasError('email') && !registerationForm.controls.userid.hasError('required')">
+        Please Enter a valid email address</mat-error>
+        <mat-error *ngIf="registerationForm.controls.userid.hasError('required')">
+        Email is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+    <div class="container-fluid" *ngIf="!isEmailVerified">
+      <a mat-raised-button (click)="sendVerificationCode()" [disabled] ="registerationForm.controls.userid.invalid">Send Verification Code</a>
+    </div>
+    
+    <mat-form-field class="full-width" *ngIf="isEmailVerified">
+        <mat-label>Name</mat-label>
+        <input formControlName="username" matInput type="text">
+        <mat-error *ngIf="registerationForm.controls.username.hasError('required')">
+          Name is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+  
+    <mat-form-field class="full-width" *ngIf="isEmailVerified">
+      <mat-label>Password</mat-label>
+      <input formControlName="password" matInput [type]="hide ? 'password' : 'text'" placeholder="Enter Password">
+      <button ng-show="this.loginForm.controls.password.dirty==true" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+      
+    </mat-form-field>
+    
+    <div class="container-fluid" *ngIf="isEmailVerified">
+      <a mat-raised-button (click)="register()" [disabled]="registerationForm.invalid">Register</a>
+    </div>
+      
+    
+  <div class="container-fluid loginLink">
+    <p>Have account? <a href="#" [routerLink]="['/login']">Login</a></p>
+  </div>
+  <strong *ngIf="errorMessage!=null">{{errorMessage}}</strong>
+    
+  
+  </form>
+  <mat-progress-bar mode="indeterminate" *ngIf="!isLoaded"></mat-progress-bar>
+    </div>
+</div>
+
+
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content" >
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          
+        </div>
+        <div class="modal-body" style="text-align: left;">
+          <form [formGroup] = "emailVerificationForm">
+          <p>Verification code sent to : <span style="font-weight: bold;">{{emailId}}</span></p>
+          <input id="verificationCode" type="number" formControlName = "verificationCode"  placeholder="Enter 6 digits code">
+        </form>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" (click)="verifyEmail()" [disabled] ="emailVerificationForm.controls.verificationCode.invalid">Verify</button>
+          
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+  
